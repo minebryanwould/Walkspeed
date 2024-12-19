@@ -13,33 +13,33 @@ if not screenGui then
 end
 button.Parent = screenGui
 
--- Set a background color to make sure the button is visible
-button.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background
-
--- Set the image for the button to the uploaded asset with Asset ID
+-- Set button image and size
 button.Image = "rbxassetid://78883039855625"
+button.Position = UDim2.new(0, 590, 0, 5)  -- Position as per your request
+button.Size = UDim2.new(0, 90, 0, 90)  -- Set size to 90x90 pixels
 
--- Set the button's position to the center of the screen and size to 200x200
-button.Position = UDim2.new(0.5, -100, 0.5, -100)  -- Center the button
-button.Size = UDim2.new(0, 200, 0, 200)  -- Set size to 200x200 pixels
+-- Default walk speed and variable to track current speed state
+local walkSpeedState = 20
+humanoid.WalkSpeed = walkSpeedState -- Apply the initial walk speed
 
--- Variables
-local walkSpeedState = 20 -- Default walk speed is 20
-
--- Function to toggle walk speed
+-- Function to toggle walk speed when the button is clicked
 local function toggleWalkSpeed()
     if walkSpeedState == 20 then
         walkSpeedState = 40
     else
         walkSpeedState = 20
     end
-
     humanoid.WalkSpeed = walkSpeedState -- Apply the new walk speed
 end
 
--- When the button is clicked, toggle the walk speed
+-- Function to ensure the walk speed stays constant, even if slowed down
+local function maintainWalkSpeed()
+    humanoid.WalkSpeed = walkSpeedState -- Continuously apply the walk speed
+end
+
+-- Button click event to toggle walk speed
 button.MouseButton1Click:Connect(function()
-    toggleWalkSpeed()
+    toggleWalkSpeed() -- Toggle walk speed between 20 and 40
 end)
 
 -- Reassign walk speed on respawn (if the player dies and respawns)
@@ -49,9 +49,7 @@ player.CharacterAdded:Connect(function(newCharacter)
     humanoid.WalkSpeed = walkSpeedState -- Apply the saved walk speed to the new character
 end)
 
--- Ensure walk speed is updated continuously during gameplay (check if humanoid exists)
+-- Continuously ensure the walk speed is maintained during gameplay
 game:GetService("RunService").Heartbeat:Connect(function()
-    if humanoid then
-        humanoid.WalkSpeed = walkSpeedState -- Continuously apply walk speed while in-game
-    end
+    maintainWalkSpeed() -- Ensure the walk speed is kept constant
 end)
