@@ -19,9 +19,9 @@ button.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background
 -- Set the image for the button to the uploaded asset with Asset ID
 button.Image = "rbxassetid://78883039855625"
 
--- Set the button's position and size
-button.Position = UDim2.new(0, 100, 0, 100) -- Position near the top-left
-button.Size = UDim2.new(0, 200, 0, 100) -- Make the button easier to see
+-- Set the button's position (same as original) and size (larger)
+button.Position = UDim2.new(0, 590, 0, 5)  -- Keep the original position
+button.Size = UDim2.new(0, 200, 0, 200)  -- Increase size to 200x200 pixels
 
 -- Variables
 local walkSpeedState = 20 -- Default walk speed is 20
