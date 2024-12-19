@@ -7,19 +7,19 @@ local humanoid = character:WaitForChild("Humanoid")
 -- Variables
 local jumpCount = 0
 local walkSpeedState = 20 -- Default walk speed is 20
-local resetTime = 0.5 -- Time (in seconds) to reset jump count after inactivity
+local resetTime = 0.3 -- Time (in seconds) to reset jump count after inactivity (set to 0.3)
 local lastJumpTime = tick() -- Time of the last jump
 
 -- Function to reset jump count if time between jumps is greater than resetTime
 local function resetJumpCount()
     if tick() - lastJumpTime > resetTime then
-        jumpCount = 0 -- Reset jump count if time between jumps exceeds 0.5 seconds
+        jumpCount = 0 -- Reset jump count if time between jumps exceeds 0.3 seconds
     end
 end
 
--- Function to update walk speed after 5 or more jumps
+-- Function to update walk speed after 3 or more jumps
 local function updateWalkSpeed()
-    if jumpCount >= 5 then
+    if jumpCount >= 3 then
         if walkSpeedState == 40 then
             walkSpeedState = 20
         else
@@ -41,7 +41,7 @@ userInput.JumpRequest:Connect(function()
     jumpCount += 1
     lastJumpTime = tick() -- Update the last jump time
 
-    updateWalkSpeed() -- Check if it's time to change walk speed (5 or more jumps)
+    updateWalkSpeed() -- Check if it's time to change walk speed (3 or more jumps)
 end)
 
 -- Reassign walk speed on respawn (if the player dies and respawns)
