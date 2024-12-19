@@ -17,9 +17,9 @@ local function resetJumpCount()
     end
 end
 
--- Function to update walk speed after 3 or more jumps
+-- Function to update walk speed after 5 or more jumps
 local function updateWalkSpeed()
-    if jumpCount >= 3 then
+    if jumpCount >= 5 then
         if walkSpeedState == 40 then
             walkSpeedState = 20
         else
@@ -39,14 +39,4 @@ userInput.JumpRequest:Connect(function()
     resetJumpCount() -- Reset if the time between jumps is too long
 
     jumpCount += 1
-    lastJumpTime = tick() -- Update the last jump time
-
-    updateWalkSpeed() -- Check if it's time to change walk speed (3 or more jumps)
-end)
-
--- Reassign walk speed on respawn (if the player dies and respawns)
-player.CharacterAdded:Connect(function(newCharacter)
-    character = newCharacter
-    humanoid = character:WaitForChild("Humanoid")
-    humanoid.WalkSpeed = walkSpeedState -- Apply the saved walk speed to the new character
-end)
+    lastJumpTime = tick
