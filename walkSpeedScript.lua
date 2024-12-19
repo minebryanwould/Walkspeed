@@ -6,14 +6,14 @@ local humanoid = character:WaitForChild("Humanoid")
 
 -- Variables
 local jumpCount = 0
-local walkSpeedState = 20 -- Set default walk speed to 20
+local walkSpeedState = 20 -- Default walk speed is 20
 local resetTime = 0.5 -- Time (in seconds) to reset jump count after inactivity
-local lastJumpTime = tick() -- Time of last jump
+local lastJumpTime = tick() -- Time of the last jump
 
--- Function to reset jump count after a period of time
+-- Function to reset jump count if time between jumps is greater than resetTime
 local function resetJumpCount()
     if tick() - lastJumpTime > resetTime then
-        jumpCount = 0 -- Reset jump count if time between jumps is more than 0.5 seconds
+        jumpCount = 0 -- Reset jump count if time between jumps exceeds 0.5 seconds
     end
 end
 
