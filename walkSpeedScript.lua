@@ -4,17 +4,27 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local button = script.Parent -- This assumes the script is inside an ImageButton
 
--- Variables
-local walkSpeedState = 20 -- Default walk speed is 20
+-- Ensure the button is parented to a ScreenGui inside the PlayerGui
+local screenGui = player.PlayerGui:FindFirstChildOfClass("ScreenGui")
+if not screenGui then
+    -- Create a ScreenGui if it doesn't exist
+    screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = player.PlayerGui
+end
+button.Parent = screenGui
+
+-- Set a background color to make sure the button is visible
+button.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background
 
 -- Set the image for the button to the uploaded asset with Asset ID
 button.Image = "rbxassetid://78883039855625"
 
--- Set the button's position
-button.Position = UDim2.new(0, 590, 0, 5)
+-- Set the button's position and size
+button.Position = UDim2.new(0, 100, 0, 100) -- Position near the top-left
+button.Size = UDim2.new(0, 200, 0, 100) -- Make the button easier to see
 
--- Set the button's size to 90 pixels width and height
-button.Size = UDim2.new(0, 90, 0, 90)
+-- Variables
+local walkSpeedState = 20 -- Default walk speed is 20
 
 -- Function to toggle walk speed
 local function toggleWalkSpeed()
@@ -39,7 +49,9 @@ player.CharacterAdded:Connect(function(newCharacter)
     humanoid.WalkSpeed = walkSpeedState -- Apply the saved walk speed to the new character
 end)
 
--- Ensure walk speed is updated continuously during gameplay
+-- Ensure walk speed is updated continuously during gameplay (check if humanoid exists)
 game:GetService("RunService").Heartbeat:Connect(function()
-    humanoid.WalkSpeed = walkSpeedState -- Continuously apply walk speed while in-game
+    if humanoid then
+        humanoid.WalkSpeed = walkSpeedState -- Continuously apply walk speed while in-game
+    end
 end)
