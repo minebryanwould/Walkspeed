@@ -13,13 +13,13 @@ local lastJumpTime = tick()
 -- Function to reset jump count after a period of time
 local function resetJumpCount()
     if tick() - lastJumpTime > resetTime then
-        jumpCount = 0
+        jumpCount = 0 -- Only reset if the player hasn't jumped in 'resetTime' seconds
     end
 end
 
--- Function to update walk speed after jumping 5 times
+-- Function to update walk speed after 5 or more jumps
 local function updateWalkSpeed()
-    if jumpCount == 5 then
+    if jumpCount >= 5 then
         if walkSpeedState == 40 then
             walkSpeedState = 20
         else
@@ -27,17 +27,16 @@ local function updateWalkSpeed()
         end
 
         humanoid.WalkSpeed = walkSpeedState
-        jumpCount = 0 -- Reset jump count after 5 jumps
+        jumpCount = 0 -- Reset jump count after toggling walk speed
     end
 end
 
 -- Event listener for jump detection
 userInput.JumpRequest:Connect(function()
-    resetJumpCount() -- Reset jump count if the player hasn't jumped for a while
     jumpCount += 1
     lastJumpTime = tick() -- Update the last jump time
 
-    updateWalkSpeed() -- Check if it's time to change walk speed
+    updateWalkSpeed() -- Check if it's time to change walk speed (5 or more jumps)
 end)
 
 -- Reassign walk speed on respawn (if the player dies and respawns)
@@ -45,9 +44,4 @@ player.CharacterAdded:Connect(function(newCharacter)
     character = newCharacter
     humanoid = character:WaitForChild("Humanoid")
     humanoid.WalkSpeed = walkSpeedState -- Apply the saved walk speed to the new character
-end)
-
--- Ensure walk speed is updated continuously during gameplay
-game:GetService("RunService").Heartbeat:Connect(function()
-    humanoid.WalkSpeed = walkSpeedState -- Continuously apply walk speed while in-game
 end)
