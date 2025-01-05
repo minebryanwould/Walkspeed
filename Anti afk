@@ -1,0 +1,6 @@
+while (true) {
+    wait(10);
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.W, false, game);
+    wait(0.1);
+    game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.W, false, game);
+}
