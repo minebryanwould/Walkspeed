@@ -1,32 +1,15 @@
 if (game.PlaceId === 16732694052) {
-    const HttpService = game:GetService("HttpService");
-    const TeleportService = game:GetService("TeleportService");
-
-    function serverHop() {
-        const serversUrl = `https://games.roblox.com/v1/games/${game.PlaceId}/servers/Public?sortOrder=Asc&limit=100`;
-        const servers = HttpService:JSONDecode(game:HttpGet(serversUrl)).data;
-        for (let i = 0; i < servers.length; i++) {
-            if (servers[i].playing < servers[i].maxPlayers) {
-                TeleportService:TeleportToPlaceInstance(game.PlaceId, servers[i].id);
-                break;
-            }
-        }
-    }
-
     while (true) {
         try {
             wait(10);
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.W, false, game);
-            wait(0.1);
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.W, false, game);
+            // Check if the player is currently idle (e.g., no inputs detected)
+            if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.W, false, game);
+                wait(0.1);
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.W, false, game);
+            end
         } catch (e) {
-            try {
-                print("Reconnecting...");
-                TeleportService:Teleport(game.PlaceId);
-            } catch (e) {
-                print("Reconnection failed, hopping to a new server...");
-                serverHop();
-            }
+            print("Error in anti-idle script.");
         }
     }
 }
