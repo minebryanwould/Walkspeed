@@ -1,15 +1,33 @@
-if (game.PlaceId === 16732694052) {
-    while (true) {
-        try {
-            wait(10);
-            // Check if the player is currently idle (e.g., no inputs detected)
-            if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
-                game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.W, false, game);
-                wait(0.1);
-                game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.W, false, game);
-            end
-        } catch (e) {
-            print("Error in anti-idle script.");
-        }
-    }
-}
+PlaceTower("Scout", 4.448,1.000,-37.287, 250)
+PlaceTower("Scout", 4.489,1.037,-34.163, 250)
+VoteSkipWave(0, 0)
+PlaceTower("Scout", 4.717,1.037,-31.080, 250)
+PlaceTower("Scout", 7.151,1.000,-38.996, 250)
+PlaceTower("Scout", 7.282,1.037,-35.973, 250)
+PlaceTower("Scout", 7.361,1.037,-32.939, 250)
+UpgradeTower(4.448, -37.287, 150)
+UpgradeTower(4.489, -34.163, 150)
+UpgradeTower(7.151, -38.996, 150)
+UpgradeTower(7.282, -35.973, 150)
+UpgradeTower(7.361, -32.939, 150)
+UpgradeTower(4.717, -31.080, 150)
+UpgradeTower(4.448, -37.287, 500)
+UpgradeTower(7.151, -38.996, 500)
+UpgradeTower(7.282, -35.973, 500)
+UpgradeTower(4.489, -34.163, 500)
+UpgradeTower(7.361, -32.939, 500)
+UpgradeTower(4.717, -31.080, 500)
+PlaceTower("Commander", 7.468,1.037,-29.735, 850)
+UpgradeTower(7.468, -29.735, 300)
+PlaceTower("Scout", -1.154,1.000,-37.245, 250)
+UpgradeTower(-1.154, -37.245, 150)
+UpgradeTower(-1.154, -37.245, 500)
+PlaceTower("Scout", -1.151,1.037,-34.042, 250)
+UpgradeTower(-1.151, -34.042, 150)
+UpgradeTower(-1.151, -34.042, 500)
+PlaceTower("Scout", -0.896,1.037,-30.834, 250)
+UpgradeTower(-0.896, -30.834, 150)
+UpgradeTower(-0.896, -30.834, 500)
+wait (8) 
+local TeleportService = game:GetService("TeleportService")
+TeleportService:Teleport(3260590327)
