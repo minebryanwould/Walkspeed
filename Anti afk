@@ -1,5 +1,9 @@
-local TeleportService = game:GetService("TeleportService")
-TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId)
+local Players = game:GetService("Players")
+
+task.spawn(function()
+    task.wait(140)
+    Players.LocalPlayer:Kick()
+end)
 PlaceTower("Scout", 4.448,1.000,-37.287, 250)
 PlaceTower("Scout", 4.489,1.037,-34.163, 250)
 VoteSkipWave(0, 0)
@@ -29,4 +33,4 @@ UpgradeTower(-1.151, -34.042, 150)
 UpgradeTower(-1.151, -34.042, 500)
 PlaceTower("Scout", -0.896,1.037,-30.834, 250)
 UpgradeTower(-0.896, -30.834, 150)
-UpgradeTower(-0.896, -30.834, 500)
+UpgradeTower(-0.896, -30.834, 
