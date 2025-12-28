@@ -1,3 +1,5 @@
+task.wait(140)
+TeleportService:Teleport(targetPlaceId)
 PlaceTower("Scout", 4.448,1.000,-37.287, 250)
 PlaceTower("Scout", 4.489,1.037,-34.163, 250)
 VoteSkipWave(0, 0)
