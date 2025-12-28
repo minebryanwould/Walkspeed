@@ -1,10 +1,5 @@
 local TeleportService = game:GetService("TeleportService")
-local targetPlaceId = 3260590327
-
-task.spawn(function()
-    task.wait(140)
-    TeleportService:Teleport(targetPlaceId)
-end)
+TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId)
 PlaceTower("Scout", 4.448,1.000,-37.287, 250)
 PlaceTower("Scout", 4.489,1.037,-34.163, 250)
 VoteSkipWave(0, 0)
