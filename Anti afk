@@ -1,10 +1,10 @@
+PlaceTower("Scout", 4.448,1.000,-37.287, 250)
 local Players = game:GetService("Players")
 
 task.spawn(function()
     task.wait(140)
     Players.LocalPlayer:Kick()
 end)
-PlaceTower("Scout", 4.448,1.000,-37.287, 250)
 PlaceTower("Scout", 4.489,1.037,-34.163, 250)
 VoteSkipWave(0, 0)
 PlaceTower("Scout", 4.717,1.037,-31.080, 250)
